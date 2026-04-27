@@ -16,6 +16,9 @@ SELECT  DISTINCT cst_gndr -- check other columns as well
 FROM bronze.crm_cust_info;
 
 -- Final table:
+PRINT '>> Truncating table: silver.crm_cust_info';
+TRUNCATE TABLE silver.crm_cust_info;
+PRINT '>> Inserting Data into silver.crm_cust_info';
 INSERT INTO silver.crm_cust_info (
 	cst_id, 
 	cst_key,
