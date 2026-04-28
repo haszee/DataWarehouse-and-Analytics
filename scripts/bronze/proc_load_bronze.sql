@@ -1,4 +1,3 @@
-
 /*
 =================================================================
 DDL Script: Insert info into Bronze Layer Tables
@@ -15,10 +14,6 @@ Purpose:
 		EXEC bronze.load_bronze;
 =================================================================
 */
-
-EXEC bronze.load_bronze
-
-GO
 
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 
@@ -180,3 +175,7 @@ BEGIN
 		PRINT '======================================';
 	END CATCH
 END
+
+GO 
+
+EXEC bronze.load_bronze
