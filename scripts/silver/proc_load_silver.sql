@@ -4,9 +4,11 @@
 DDL Script: Insert info into Silver Layer Tables
 =================================================================
 Purpose: 
-	Truncates existing bronze tables before loading data
-	Clean & Transform Data
-	Load data into silver layer tables from bronze layer table
+	Performs ETL (Extract, Transform, Load) process to popular 'silver' schema tables from 'bronze' tables
+	Actions:
+		-Truncates existing silver tables before loading data
+		-Cleans & Transforms Data
+		-Loads data into silver layer tables from bronze layer table
 	Gets loading time for each table and the whole batch
 	Catches error and prints error statement
 
