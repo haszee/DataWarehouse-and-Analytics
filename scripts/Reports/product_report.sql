@@ -61,7 +61,7 @@ SELECT
     MAX(order_date) AS last_sale_date,
     COUNT(DISTINCT order_number) AS total_orders,
 	COUNT(DISTINCT customer_key) AS total_customers,
-    SUM(sales_amount) AS total_sales,
+    SUM(sales_amount) AS total_revenue,
     SUM(quantity) AS total_quantity,
 	ROUND(AVG(CAST(sales_amount AS FLOAT) / NULLIF(quantity, 0)),1) AS avg_selling_price
 FROM base_query
@@ -86,26 +86,26 @@ SELECT
 	last_sale_date,
 	DATEDIFF(MONTH, last_sale_date, GETDATE()) AS recency_in_months,
 	CASE
-		WHEN total_sales > 50000 THEN 'High-Performer'
-		WHEN total_sales >= 10000 THEN 'Mid-Range'
+		WHEN total_revenue > 50000 THEN 'High-Performer'
+		WHEN total_revenue >= 10000 AND total_revenue <= 50000 THEN 'Mid-Range'
 		ELSE 'Low-Performer'
-	END AS product_segment,
+	END AS product_performance,
 	lifespan,
 	total_orders,
-	total_sales,
+	total_revenue,
 	total_quantity,
 	total_customers,
 	avg_selling_price,
 	-- Average Order Revenue (AOR)
 	CASE 
 		WHEN total_orders = 0 THEN 0
-		ELSE total_sales / total_orders
+		ELSE total_revenue / total_orders
 	END AS avg_order_revenue,
 
 	-- Average Monthly Revenue
 	CASE
-		WHEN lifespan = 0 THEN total_sales
-		ELSE total_sales / lifespan
+		WHEN lifespan = 0 THEN total_revenue
+		ELSE total_revenue / lifespan
 	END AS avg_monthly_revenue
 
 FROM product_aggregations 
